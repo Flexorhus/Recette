@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recettes</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <nav class="navMenu">
+                <a href="./index.html" class="navItem">Home</a>
+                <a href="" class="navItem">Mes Recettes</a>
+                <a href="" class="navItem">Mes Idées</a>
+                <button id="openSignupModal">S'inscrire</button>
+                <button id="openLoginModal">Se connecter</button>
+                <button id="openCreateRecipeModal">Créer une recette</button>
+                <div class="group">
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                            </path>
+                        </g>
+                    </svg>
+                    <input placeholder="Search" type="search" class="input">
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section>
+            <article>
+                <div>
+
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Modale d'inscription -->
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <div id="userList"></div>
+                <span class="close">&times;</span>
+                <form id="signupForm">
+                    <h3>S'inscrire</h3>
+                    <input type="text" id="signupUsername" placeholder="Nom d'utilisateur" required>
+                    <input type="email" id="signupEmail" placeholder="Email" required>
+                    <input type="password" id="signupPassword" placeholder="Mot de passe" required>
+                    <button type="submit">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+        <!-- Modale de connexion -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="loginForm">
+                    <h3>Connexion</h3>
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modale de creation de recette -->
+        <div id="createRecipeModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <form id="recetteForm">
+                    <h3>Votre recette</h3>
+                    <label for="titre">Titre :</label><br>
+                    <input type="text" id="titre" name="titre" required><br>
+
+                    <label for="ingredients">Ingrédients (séparés par une virgule) :</label><br>
+                    <input type="text" id="ingredients" name="ingredients" required><br>
+
+                    <label for="instructions">Instructions :</label><br>
+                    <textarea id="instructions" name="instructions" required></textarea><br>
+
+                    <label for="tpsPrepa">Temps de préparation (minutes) :</label><br>
+                    <input type="number" id="tpsPrepa" name="tpsPrepa"><br>
+
+                    <label for="tpsCuisson">Temps de cuisson (minutes) :</label><br>
+                    <input type="number" id="tpsCuisson" name="tpsCuisson"><br>
+
+                    <label for="difficulte">Difficulté :</label><br>
+                    <select id="difficulte" name="difficulte">
+                        <option value="Facile">Facile</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Difficile">Difficile</option>
+                    </select><br>
+
+                    <label for="categorie">Catégorie :</label><br>
+                    <select id="categorie" name="categorie">
+                        <option value="Entrée">Entrée</option>
+                        <option value="Plat principal">Plat Principal</option>
+                        <option value="Dessert">Dessert</option>
+                    </select><br>
+
+                    <button type="button" id="btnSend">Créer Recette</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modale de modification de recette -->
+        <div id="editRecipeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+
+                <form id="editRecetteForm">
+                    <h3>Modifier la Recette</h3>
+                    <label for="editTitre">Titre:</label>
+                    <input type="text" id="editTitre" name="titre" required>
+
+                    <label for="editIngredients">Ingrédients (séparés par des virgules):</label>
+                    <textarea id="editIngredients" name="ingredients" required></textarea>
+
+                    <label for="editInstructions">Instructions (séparées par des virgules):</label>
+                    <textarea id="editInstructions" name="instructions" required></textarea>
+
+                    <label for="editTpsPrepa">Temps de préparation (minutes):</label>
+                    <input type="number" id="editTpsPrepa" name="tpsPrepa" required>
+
+                    <label for="editTpsCuisson">Temps de cuisson (minutes):</label>
+                    <input type="number" id="editTpsCuisson" name="tpsCuisson" required>
+
+                    <label for="editDifficulte">Difficulté:</label>
+                    <select id="editDifficulte" name="difficulte">
+                        <option value="Facile">Facile</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Difficile">Difficile</option>
+                    </select><br>
+
+                    <label for="editCategorie">Catégorie:</label>
+                    <select id="editCategorie" name="categorie">
+                        <option value="Entrée">Entrée</option>
+                        <option value="Plat principal">Plat Principal</option>
+                        <option value="Dessert">Dessert</option>
+                    </select><br>
+                    <button type="submit">Modifier la recette</button>
+                </form>
+            </div>
+        </div>
+        <section>
+            <div class="custom-shape-divider-top-1726922217">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path
+                        d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                        opacity=".25" class="shape-fill"></path>
+                    <path
+                        d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                        opacity=".5" class="shape-fill"></path>
+                    <path
+                        d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                        class="shape-fill"></path>
+                </svg>
+            </div>
+            <article>
+                <h2>MENU DU JOUR !!</h2>
+                <div>
+                    <!-- 3 PHOTOS ENTREE PLAT DESSERT AVEC LE NOM DU PLAT ET RECETTE   -->
+                </div>
+            </article>
+        </section>
+        <section>
+
+            <article class="mainArticle">
+                <div class="imgContainer">
+                    <h2>SUGGESTION DE RECETTE </h2>
+                    <div class="custom-shape-divider-bottom-1726923158">
+                        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                            preserveAspectRatio="none">
+                            <path
+                                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                                opacity=".25" class="shape-fill"></path>
+                            <path
+                                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                                opacity=".5" class="shape-fill"></path>
+                            <path
+                                d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                                class="shape-fill"></path>
+                        </svg>
+                    </div>
+                    <img src="./assets/css/repas1.avif" alt="">
+                    <img src="./assets/css/repas3.avif" alt="">
+                    <img src="./assets/css/repas4.avif" alt="">
+                    <img src="./assets/css/repas5.avif" alt="">
+                    <img src="./assets/css/repas6.avif" alt="">
+                    <img src="./assets/css/repas7.jpg" alt="">
+                    <img src="./assets/css/repas1.avif" alt="">
+                    <img src="./assets/css/repas3.avif" alt="">
+                    <img src="./assets/css/repas4.avif" alt="">
+                    <img src="./assets/css/repas5.avif" alt="">
+                    <img src="./assets/css/repas6.avif" alt="">
+                    <img src="./assets/css/repas7.jpg" alt="">
+                </div>
+                <div class="custom-shape-divider-top-1726922217">
+
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                        preserveAspectRatio="none">
+
+                        <path
+                            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                            opacity=".25" class="shape-fill"></path>
+                        <path
+                            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                            opacity=".5" class="shape-fill"></path>
+                        <path
+                            d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                            class="shape-fill"></path>
+                    </svg>
+
+                </div>
+
+
+
+            </article>
+        </section>
+        <h2>LISTE DES RECETTES</h2>
+        <!-- Liste des recettes -->
+        <div class="custom-shape-divider-bottom-1726923158">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                    opacity=".25" class="shape-fill"></path>
+                <path
+                    d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                    opacity=".5" class="shape-fill"></path>
+                <path
+                    d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="divRecette">
+
+            <div id="recetteList"></div>
+        </div>
+        <section>
+            <article>
+                <div class="custom-shape-divider-top-1726922217">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                        preserveAspectRatio="none">
+                        <path
+                            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                            opacity=".25" class="shape-fill"></path>
+                        <path
+                            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                            opacity=".5" class="shape-fill"></path>
+                        <path
+                            d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                            class="shape-fill"></path>
+                    </svg>
+                </div>
+                <h2>C'EST DE SAISON !!</h2>
+                <div class="saison">
+                    <div>
+                        <h3>Le Melon</h3>
+                        <img src="./assets/css/melon.avif" alt="imgMelon">
+                    </div>
+                    <div>
+                        <h3>La Poire</h3>
+                        <img src="./assets/css/poire.avif" alt="imgPoire">
+                    </div>
+                    <div>
+                        <h3>La Pêche</h3>
+                        <img src="./assets/css/peche.avif" alt="imgPêche">
+                    </div>
+                    <div>
+                        <h3>Le Poireau</h3>
+                        <img src="./assets/css/poireau.jpg" alt="imgPoireau">
+                    </div>
+                    <div>
+                        <h3>Le Chou-fleur</h3>
+                        <img src="./assets/css/choufleur.avif" alt="imgChou">
+                    </div>
+                    <div>
+                        <h3>La Patate douce</h3>
+                        <img src="./assets/css/patatedouce.jpg" alt="imgPatate">
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section>
+            <h2>RECETTES PAR THÈME</h2>
+            <article>
+                <div class="theme">
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                    <ol>
+                        <ul>Mojito</ul>
+                        <ul>Filet mignon</ul>
+                        <ul>Bouchées à la reine</ul>
+                        <ul>Pizza maison</ul>
+                        <ul>Lasagne</ul>
+                        <ul>Blanquette de veau</ul>
+                    </ol>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <h3>ANIS ZNINA || recette cuisine 2024 </h3>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
